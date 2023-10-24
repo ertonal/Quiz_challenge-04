@@ -1,12 +1,15 @@
 var mainEl = document.getElementById("main")
-var timerElement = document.getElementById ("timer")
+var timerElement = document.getElementById("timer")
 var buttonOne = document.getElementById("button1")
 var buttonTwo = document.getElementById("button2")
 var buttonThree = document.getElementById("button3")
 var buttonFour = document.getElementById("button4")
 var question = document.getElementById('questions')
 
-
+buttonOne.addEventListener('click', checkAnswer)
+buttonTwo.addEventListener('click', checkAnswer)
+buttonThree.addEventListener('click', checkAnswer)
+buttonFour.addEventListener('click', checkAnswer)
 
 
 mainEl.style.display = "none"
@@ -23,7 +26,7 @@ startButton.addEventListener('click', function () {
 
 
 var currentQuestion = 0;
-
+var score = 0;
 var timerObject;
 var timerCounter = 50;
 
@@ -64,20 +67,39 @@ var questionDB = [
 function startTimer() {
 
 
-    timerObject= setInterval(function(){
-        timerElement.innerText = "Time Left: "+timerCounter
-        if(timerCounter > 0){
+    timerObject = setInterval(function () {
+        timerElement.innerText = "Time Left: " + timerCounter
+        if (timerCounter > 0) {
             timerCounter-- // timerCounter = timerCounter -1
         }
-    },1000)
+    }, 1000)
 
 }
 
 function displayQuestion() {
     question.innerText = questionDB[currentQuestion].question;
-    buttonOne.innerText= questionDB[currentQuestion].option1;
-    buttonTwo.innerText= questionDB[currentQuestion].option2;
-    buttonThree.innerText= questionDB[currentQuestion].option3;
-    buttonFour.innerText= questionDB[currentQuestion].option4;
+    buttonOne.innerText = questionDB[currentQuestion].option1;
+    buttonTwo.innerText = questionDB[currentQuestion].option2;
+    buttonThree.innerText = questionDB[currentQuestion].option3;
+    buttonFour.innerText = questionDB[currentQuestion].option4;
+
+}
+
+
+function checkAnswer(event) {
+    var specific = event.target.innerText
+    if (specific == questionDB[currentQuestion].answer) {
+        score += 5
+    } else {
+        timerCounter -= 5
+
+    }
+    if (currentQuestion<questionDB.length-1){
+
+        currentQuestion++ 
+        displayQuestion()
+
+    }
+
 
 }
