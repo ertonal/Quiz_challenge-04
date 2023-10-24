@@ -3,3 +3,16 @@
     background-color: aqua;
     min-width: 30%;
 }
+
+body{
+    align-items: center;
+    text-align: center ;
+}   
+
+#main section{
+width:80%;
+margin:auto;
+}
+.btn-option{
+    width: 90%;
+}
